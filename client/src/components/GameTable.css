@@ -1,0 +1,270 @@
+.game-screen {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background: var(--bg-dark);
+  overflow: hidden;
+}
+
+/* Top bar */
+.top-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 20px;
+  background: rgba(14, 20, 36, 0.9);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  z-index: 10;
+  flex-shrink: 0;
+}
+
+.top-left, .top-right {
+  min-width: 140px;
+}
+
+.top-right {
+  text-align: right;
+}
+
+.leave-btn {
+  padding: 6px 14px;
+  background: rgba(255, 255, 255, 0.06);
+  color: var(--text-secondary);
+  border-radius: 8px;
+  font-size: 0.8rem;
+}
+
+.leave-btn:hover {
+  background: rgba(231, 76, 60, 0.15);
+  color: var(--danger);
+}
+
+.top-center {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.room-label {
+  color: var(--text-secondary);
+  font-size: 0.8rem;
+}
+
+.room-code {
+  background: rgba(240, 192, 64, 0.1);
+  color: var(--accent);
+  padding: 4px 14px;
+  border-radius: 6px;
+  font-weight: 700;
+  font-size: 1rem;
+  letter-spacing: 3px;
+  border: 1px solid rgba(240, 192, 64, 0.2);
+}
+
+.room-code:hover {
+  background: rgba(240, 192, 64, 0.2);
+}
+
+.phase-badge {
+  background: rgba(52, 152, 219, 0.15);
+  color: var(--blue);
+  padding: 4px 12px;
+  border-radius: 6px;
+  font-size: 0.8rem;
+  font-weight: 600;
+}
+
+.blinds-info {
+  color: var(--text-secondary);
+  font-size: 0.8rem;
+}
+
+/* Table area */
+.table-area {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  position: relative;
+}
+
+.poker-table {
+  position: relative;
+  width: 100%;
+  max-width: 820px;
+  height: 100%;
+  max-height: 460px;
+}
+
+.table-felt {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 70%;
+  height: 65%;
+  background: radial-gradient(ellipse, var(--bg-table) 0%, var(--bg-table-dark) 100%);
+  border-radius: 50%;
+  border: 6px solid var(--border-table);
+  box-shadow:
+    0 0 0 10px rgba(0, 0, 0, 0.3),
+    inset 0 0 60px rgba(0, 0, 0, 0.2),
+    0 8px 32px rgba(0, 0, 0, 0.4);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+}
+
+/* Community cards */
+.community-cards {
+  display: flex;
+  gap: 8px;
+  justify-content: center;
+  align-items: center;
+}
+
+.card-placeholder {
+  width: 64px;
+  height: 90px;
+  border-radius: 8px;
+  border: 2px dashed rgba(255, 255, 255, 0.1);
+}
+
+/* Pot */
+.pot-display {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(0, 0, 0, 0.3);
+  padding: 6px 16px;
+  border-radius: 20px;
+}
+
+.pot-label {
+  color: rgba(255, 255, 255, 0.5);
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 1px;
+}
+
+.pot-amount {
+  color: var(--chip-gold);
+  font-size: 1.1rem;
+  font-weight: 700;
+}
+
+/* Ready area */
+.ready-area {
+  position: fixed;
+  bottom: 24px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 50;
+}
+
+.ready-btn {
+  padding: 14px 36px;
+  background: linear-gradient(135deg, var(--success), #219a52);
+  color: white;
+  border-radius: 12px;
+  font-weight: 700;
+  font-size: 1rem;
+  letter-spacing: 1px;
+  box-shadow: 0 4px 16px rgba(39, 174, 96, 0.3);
+}
+
+.ready-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(39, 174, 96, 0.4);
+}
+
+.ready-btn.ready {
+  background: rgba(46, 204, 113, 0.15);
+  color: var(--success);
+  border: 1px solid rgba(46, 204, 113, 0.3);
+  box-shadow: none;
+}
+
+/* Result overlay */
+.result-overlay {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 60;
+  animation: resultFadeIn 0.4s ease;
+}
+
+@keyframes resultFadeIn {
+  from { opacity: 0; transform: translate(-50%, -50%) scale(0.9); }
+  to { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+}
+
+.result-content {
+  background: rgba(10, 15, 26, 0.97);
+  border: 2px solid var(--accent);
+  border-radius: 20px;
+  padding: 28px 40px;
+  text-align: center;
+  box-shadow: 0 0 40px rgba(240, 192, 64, 0.2);
+  backdrop-filter: blur(12px);
+}
+
+.winner-info {
+  margin-bottom: 16px;
+}
+
+.winner-info:last-child {
+  margin-bottom: 0;
+}
+
+.winner-names {
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: var(--accent);
+  margin-bottom: 6px;
+}
+
+.winner-amount {
+  font-size: 1.1rem;
+  color: var(--chip-gold);
+  font-weight: 600;
+  margin-bottom: 4px;
+}
+
+.winner-hand {
+  font-size: 0.9rem;
+  color: var(--text-primary);
+  margin-bottom: 8px;
+}
+
+.winner-cards {
+  display: flex;
+  gap: 6px;
+  justify-content: center;
+}
+
+/* Responsive */
+@media (max-width: 700px) {
+  .table-felt {
+    width: 80%;
+    height: 55%;
+  }
+
+  .card-placeholder {
+    width: 44px;
+    height: 62px;
+  }
+
+  .top-bar {
+    padding: 8px 12px;
+  }
+
+  .blinds-info {
+    display: none;
+  }
+}

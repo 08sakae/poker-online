@@ -1,0 +1,21 @@
+{
+  "name": "poker-online",
+  "version": "1.0.0",
+  "description": "オンラインポーカー - Texas Hold'em",
+  "engines": {
+    "node": ">=18"
+  },
+  "scripts": {
+    "start": "node server/index.js",
+    "build": "cd client && npm install && npx vite build",
+    "dev": "concurrently \"node server/index.js\" \"cd client && npx vite --port 5173\"",
+    "install:all": "npm install && cd client && npm install"
+  },
+  "dependencies": {
+    "express": "^4.18.2",
+    "socket.io": "^4.7.2"
+  },
+  "devDependencies": {
+    "concurrently": "^8.2.2"
+  }
+}
