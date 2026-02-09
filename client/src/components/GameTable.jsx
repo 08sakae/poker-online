@@ -25,12 +25,18 @@ export default function GameTable({
   onReady,
   onSendChat,
   onLeave,
+  onAddBot,
+  onRemoveBot,
 }) {
   const [showResult, setShowResult] = useState(false);
 
   const me = gameState?.players?.find(p => p.id === playerId);
   const isWaiting = gameState?.phase === 'waiting';
   const myReady = me?.isReady || false;
+  const isHost = gameState?.hostId === playerId;
+  const botPlayers = gameState?.players?.filter(p => p.isBot) || [];
+  const totalPlayers = gameState?.players?.length || 0;
+  const maxPlayers = gameState?.players ? 6 : 6; // Default max
 
   // Arrange players with "me" at the bottom
   const arrangedPlayers = useMemo(() => {
@@ -125,15 +131,46 @@ export default function GameTable({
         </div>
       </div>
 
-      {/* Ready button (waiting phase) */}
+      {/* Ready & NPC controls (waiting phase) */}
       {isWaiting && me && (
         <div className="ready-area">
-          <button
-            className={`ready-btn ${myReady ? 'ready' : ''}`}
-            onClick={() => onReady(!myReady)}
-          >
-            {myReady ? '✓ 準備OK（解除する）' : '準備完了'}
-          </button>
+          <div className="ready-controls">
+            <button
+              className={`ready-btn ${myReady ? 'ready' : ''}`}
+              onClick={() => onReady(!myReady)}
+            >
+              {myReady ? '✓ 準備OK（解除する）' : '準備完了'}
+            </button>
+
+            {isHost && (
+              <div className="npc-controls">
+                <button
+                  className="npc-add-btn"
+                  onClick={onAddBot}
+                  disabled={totalPlayers >= 6}
+                  title="NPCを追加"
+                >
+                  🤖 NPC追加
+                </button>
+                {botPlayers.length > 0 && (
+                  <div className="npc-list">
+                    {botPlayers.map(bot => (
+                      <div key={bot.id} className="npc-item">
+                        <span className="npc-name">{bot.name}</span>
+                        <button
+                          className="npc-remove-btn"
+                          onClick={() => onRemoveBot(bot.id)}
+                          title="NPCを削除"
+                        >
+                          ✕
+                        </button>
+                      </div>
+                    ))}
+                  </div>
+                )}
+              </div>
+            )}
+          </div>
         </div>
       )}
 

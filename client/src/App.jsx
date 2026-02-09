@@ -93,6 +93,24 @@ function AppContent() {
     socket.emit('chat_message', { message });
   }, [socket]);
 
+  const handleAddBot = useCallback(() => {
+    if (!socket) return;
+    socket.emit('add_bot', {}, (response) => {
+      if (response?.error) {
+        alert(response.error);
+      }
+    });
+  }, [socket]);
+
+  const handleRemoveBot = useCallback((botId) => {
+    if (!socket) return;
+    socket.emit('remove_bot', { botId }, (response) => {
+      if (response?.error) {
+        alert(response.error);
+      }
+    });
+  }, [socket]);
+
   if (!connected) {
     return (
       <div className="connecting-screen">
@@ -125,6 +143,8 @@ function AppContent() {
       onReady={handleReady}
       onSendChat={handleSendChat}
       onLeave={handleLeaveRoom}
+      onAddBot={handleAddBot}
+      onRemoveBot={handleRemoveBot}
     />
   );
 }

@@ -144,6 +144,15 @@
   color: var(--danger);
 }
 
+/* Bot player styling */
+.player-info.is-bot {
+  border-color: rgba(52, 152, 219, 0.3);
+}
+
+.player-info.is-bot .player-name {
+  color: #5dade2;
+}
+
 /* Responsive adjustments */
 @media (max-width: 900px) {
   .player-info {

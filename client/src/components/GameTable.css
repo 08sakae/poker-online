@@ -166,6 +166,13 @@
   z-index: 50;
 }
 
+.ready-controls {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+}
+
 .ready-btn {
   padding: 14px 36px;
   background: linear-gradient(135deg, var(--success), #219a52);
@@ -187,6 +194,78 @@
   color: var(--success);
   border: 1px solid rgba(46, 204, 113, 0.3);
   box-shadow: none;
+}
+
+/* NPC Controls */
+.npc-controls {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+}
+
+.npc-add-btn {
+  padding: 10px 24px;
+  background: linear-gradient(135deg, #3498db, #2980b9);
+  color: white;
+  border-radius: 10px;
+  font-weight: 600;
+  font-size: 0.9rem;
+  box-shadow: 0 4px 12px rgba(52, 152, 219, 0.3);
+  transition: all 0.2s;
+}
+
+.npc-add-btn:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(52, 152, 219, 0.4);
+}
+
+.npc-add-btn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.npc-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  justify-content: center;
+  max-width: 400px;
+}
+
+.npc-item {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(52, 152, 219, 0.12);
+  border: 1px solid rgba(52, 152, 219, 0.25);
+  border-radius: 20px;
+  padding: 4px 6px 4px 12px;
+  font-size: 0.8rem;
+}
+
+.npc-name {
+  color: var(--text-primary);
+  font-size: 0.8rem;
+}
+
+.npc-remove-btn {
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: rgba(231, 76, 60, 0.15);
+  color: var(--danger);
+  font-size: 0.7rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  line-height: 1;
+  transition: all 0.2s;
+}
+
+.npc-remove-btn:hover {
+  background: rgba(231, 76, 60, 0.3);
 }
 
 /* Result overlay */

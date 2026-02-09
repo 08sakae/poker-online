@@ -19,7 +19,7 @@ export default function Player({ player, isCurrentPlayer, isMe, isDealer, positi
       </div>
 
       {/* Player info */}
-      <div className="player-info">
+      <div className={`player-info ${player.isBot ? 'is-bot' : ''}`}>
         <div className="player-name-row">
           {isDealer && <span className="dealer-badge">D</span>}
           <span className="player-name">{player.name}</span>
