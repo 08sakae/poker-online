@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AIインテリアデザイナー</title>
+<style>
+  :root {
+    --bg: #f6f3ee; --card: #ffffff; --ink: #2b2620; --sub: #7a7267;
+    --accent: #b0714f; --accent-ink: #fff; --line: #e5ded4;
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; font-family: "Hiragino Sans", "Noto Sans JP", sans-serif; background: var(--bg); color: var(--ink); line-height: 1.7; }
+  header { padding: 28px 20px 12px; text-align: center; }
+  header h1 { margin: 0; font-size: 1.5rem; letter-spacing: .08em; }
+  header p { margin: 6px 0 0; color: var(--sub); font-size: .85rem; }
+  main { max-width: 880px; margin: 0 auto; padding: 12px 20px 80px; }
+  .card { background: var(--card); border: 1px solid var(--line); border-radius: 12px; padding: 20px; margin-top: 18px; }
+  .card h2 { margin: 0 0 10px; font-size: 1.05rem; border-left: 4px solid var(--accent); padding-left: 10px; }
+  .hint { color: var(--sub); font-size: .8rem; margin: 4px 0 10px; }
+  .thumbs { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 10px; }
+  .thumbs figure { margin: 0; position: relative; }
+  .thumbs img { width: 120px; height: 90px; object-fit: cover; border-radius: 8px; border: 1px solid var(--line); }
+  .thumbs button { position: absolute; top: -6px; right: -6px; width: 22px; height: 22px; border-radius: 50%; border: none; background: var(--ink); color: #fff; cursor: pointer; font-size: 12px; line-height: 1; }
+  .thumbs figcaption { font-size: .7rem; color: var(--sub); text-align: center; }
+  textarea, input[type=text] { width: 100%; padding: 10px; border: 1px solid var(--line); border-radius: 8px; font: inherit; background: #fcfbf9; }
+  textarea { min-height: 64px; resize: vertical; }
+  .btn { display: inline-block; padding: 10px 22px; border: none; border-radius: 8px; background: var(--accent); color: var(--accent-ink); font: inherit; font-weight: 600; cursor: pointer; }
+  .btn:disabled { opacity: .45; cursor: not-allowed; }
+  .btn.ghost { background: #efe9e0; color: var(--ink); }
+  .tastes { display: grid; grid-template-columns: repeat(auto-fill, minmax(190px, 1fr)); gap: 8px; }
+  .tastes label { display: block; border: 1px solid var(--line); border-radius: 8px; padding: 8px 10px; cursor: pointer; background: #fcfbf9; font-size: .85rem; }
+  .tastes label:has(input:checked) { border-color: var(--accent); background: #faf1ea; }
+  .tastes b { display: block; font-size: .9rem; }
+  .tastes input { margin-right: 6px; }
+  .row { display: flex; gap: 12px; flex-wrap: wrap; align-items: center; margin-top: 12px; }
+  .row > div { flex: 1; min-width: 200px; }
+  select { padding: 9px; border: 1px solid var(--line); border-radius: 8px; font: inherit; background: #fcfbf9; width: 100%; }
+  #analysisView { font-size: .88rem; }
+  #analysisView dt { font-weight: 700; margin-top: 8px; }
+  #analysisView dd { margin: 0; color: #4c453c; }
+  .tag { display: inline-block; background: #efe9e0; border-radius: 4px; padding: 1px 8px; margin: 2px; font-size: .78rem; }
+  #proposal { white-space: normal; font-size: .92rem; }
+  #proposal h2 { border-left: 4px solid var(--accent); padding-left: 10px; font-size: 1.1rem; margin-top: 26px; }
+  #proposal table { border-collapse: collapse; width: 100%; margin: 8px 0; font-size: .85rem; }
+  #proposal th, #proposal td { border: 1px solid var(--line); padding: 6px 8px; text-align: left; }
+  #proposal th { background: #f4efe8; }
+  .costbar { position: fixed; bottom: 0; left: 0; right: 0; background: var(--ink); color: #f2ede6; font-size: .78rem; padding: 8px 16px; display: flex; gap: 18px; justify-content: center; flex-wrap: wrap; }
+  .spinner { display: inline-block; width: 14px; height: 14px; border: 2px solid #ccc; border-top-color: var(--accent); border-radius: 50%; animation: spin .8s linear infinite; vertical-align: middle; margin-right: 6px; }
+  @keyframes spin { to { transform: rotate(360deg); } }
+  .error { color: #a33; font-size: .85rem; margin-top: 8px; }
+  .hidden { display: none; }
+</style>
+</head>
+<body>
+<header>
+  <h1>AI インテリアデザイナー</h1>
+  <p>図面と部屋の写真から、市販家具でつくるコーディネートを提案します</p>
+</header>
+<main>
+
+  <section class="card">
+    <h2>STEP 1 — 図面・写真をアップロード</h2>
+    <p class="hint">間取り図1枚+室内写真(最大計6枚)。送信前にブラウザ内で長辺1568pxへ自動縮小し、画像トークンを節約します。</p>
+    <input type="file" id="fileInput" accept="image/*" multiple>
+    <div class="thumbs" id="thumbs"></div>
+    <p class="hint" style="margin-top:14px">補足メモ(任意): ペットの有無、在宅ワーク、収納の悩みなど</p>
+    <textarea id="notes" placeholder="例: 夫婦+猫1匹。リモートワーク用のデスクスペースがほしい。"></textarea>
+    <div class="row">
+      <button class="btn" id="analyzeBtn" disabled>部屋を解析する</button>
+      <span id="analyzeStatus" class="hint"></span>
+    </div>
+    <div id="analyzeError" class="error"></div>
+  </section>
+
+  <section class="card hidden" id="analysisCard">
+    <h2>STEP 2 — 解析結果(デザイナーの現地調査メモ)</h2>
+    <div id="analysisView"></div>
+  </section>
+
+  <section class="card hidden" id="proposeCard">
+    <h2>STEP 3 — 提案の条件を選ぶ</h2>
+    <p class="hint">テイストは複数選択できます(多いほど出力トークンが増えます)。</p>
+    <div class="tastes" id="tastes"></div>
+    <div class="row">
+      <div>
+        <p class="hint">プラン(使用モデル)</p>
+        <select id="tier">
+          <option value="standard" selected>スタンダード — Sonnet 5(推奨・低コスト)</option>
+          <option value="premium">プレミアム — Opus 4.8(より深い検討)</option>
+          <option value="master">マスター — Fable 5(最上位・高コスト)</option>
+        </select>
+      </div>
+      <div>
+        <p class="hint">予算上限(任意)</p>
+        <input type="text" id="budget" placeholder="例: 30万円">
+      </div>
+    </div>
+    <div class="row">
+      <button class="btn" id="proposeBtn">提案書を作成する</button>
+      <span id="proposeStatus" class="hint"></span>
+    </div>
+    <div id="proposeError" class="error"></div>
+  </section>
+
+  <section class="card hidden" id="proposalCard">
+    <h2>デザイナーからの提案書</h2>
+    <div id="proposal"></div>
+  </section>
+
+</main>
+<div class="costbar" id="costbar">API使用コスト: ¥0($0.0000)</div>
+
+<script>
+const MAX_EDGE = 1568;          // これ以上の解像度は画像トークンが増えるだけなので縮小
+const JPEG_QUALITY = 0.85;
+const USD_JPY = 155;            // 概算表示用
+
+let images = [];                // {data(base64), media_type, name}
+let analysis = null;
+let totalUsd = 0;
+let tastesConfig = [];
+
+const $ = (id) => document.getElementById(id);
+
+fetch("/api/config").then(r => r.json()).then(cfg => {
+  tastesConfig = cfg.tastes;
+  $("tastes").innerHTML = cfg.tastes.map(t =>
+    `<label><input type="checkbox" value="${t.label}"><b>${t.label}</b>${t.desc}</label>`
+  ).join("");
+});
+
+// ── 画像の取り込みとリサイズ ─────────────────────────────
+$("fileInput").addEventListener("change", async (e) => {
+  for (const file of e.target.files) {
+    if (images.length >= 6) break;
+    const resized = await resizeImage(file);
+    images.push({ ...resized, name: file.name });
+  }
+  e.target.value = "";
+  renderThumbs();
+});
+
+function resizeImage(file) {
+  return new Promise((resolve, reject) => {
+    const img = new Image();
+    img.onload = () => {
+      let { width, height } = img;
+      const long = Math.max(width, height);
+      if (long > MAX_EDGE) {
+        const scale = MAX_EDGE / long;
+        width = Math.round(width * scale);
+        height = Math.round(height * scale);
+      }
+      const canvas = document.createElement("canvas");
+      canvas.width = width; canvas.height = height;
+      canvas.getContext("2d").drawImage(img, 0, 0, width, height);
+      const dataUrl = canvas.toDataURL("image/jpeg", JPEG_QUALITY);
+      URL.revokeObjectURL(img.src);
+      resolve({ data: dataUrl.split(",")[1], media_type: "image/jpeg" });
+    };
+    img.onerror = reject;
+    img.src = URL.createObjectURL(file);
+  });
+}
+
+function renderThumbs() {
+  $("thumbs").innerHTML = images.map((im, i) =>
+    `<figure><img src="data:${im.media_type};base64,${im.data}">
+     <button onclick="removeImage(${i})">×</button>
+     <figcaption>${im.name.slice(0, 16)}</figcaption></figure>`
+  ).join("");
+  $("analyzeBtn").disabled = images.length === 0;
+}
+window.removeImage = (i) => { images.splice(i, 1); renderThumbs(); };
+
+// ── STEP1: 解析 ─────────────────────────────────────────
+$("analyzeBtn").addEventListener("click", async () => {
+  $("analyzeBtn").disabled = true;
+  $("analyzeError").textContent = "";
+  $("analyzeStatus").innerHTML = '<span class="spinner"></span>Haiku 4.5 が図面・写真を読み取っています…';
+  try {
+    const res = await fetch("/api/analyze", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ images, notes: $("notes").value }),
+    });
+    const json = await res.json();
+    if (!res.ok) throw new Error(json.error || "解析に失敗しました");
+    analysis = json.analysis;
+    addCost(json.cost);
+    renderAnalysis(analysis);
+    $("analysisCard").classList.remove("hidden");
+    $("proposeCard").classList.remove("hidden");
+    $("analysisCard").scrollIntoView({ behavior: "smooth" });
+  } catch (err) {
+    $("analyzeError").textContent = err.message;
+  } finally {
+    $("analyzeStatus").textContent = "";
+    $("analyzeBtn").disabled = false;
+  }
+});
+
+function esc(s) {
+  return String(s).replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
+}
+
+function renderAnalysis(a) {
+  const furn = (a.existing_furniture || []).map(f => {
+    const mark = { keep: "残す", replace: "入替", remove: "撤去" }[f.keep_or_replace] || f.keep_or_replace;
+    return `<span class="tag">${esc(f.name)}(${mark})</span>`;
+  }).join(" ");
+  $("analysisView").innerHTML = `
+    <dl>
+      <dt>部屋</dt><dd>${esc(a.room_type)} / ${esc(a.layout)} / ${esc(a.size_estimate)}</dd>
+      <dt>開口部・採光</dt><dd>${esc(a.windows_and_doors)}</dd>
+      <dt>床・壁</dt><dd>${esc(a.floor_wall)}</dd>
+      <dt>既存家具</dt><dd>${furn || "なし"}</dd>
+      <dt>現状のテイスト</dt><dd>${esc(a.current_style)}</dd>
+      <dt>課題</dt><dd>${(a.issues || []).map(esc).join(" / ")}</dd>
+      <dt>ポテンシャル</dt><dd>${(a.opportunities || []).map(esc).join(" / ")}</dd>
+      <dt>読み取り確度</dt><dd>${esc(a.confidence)} — ${esc(a.notes)}</dd>
+    </dl>`;
+}
+
+// ── STEP3: 提案生成(SSE) ───────────────────────────────
+$("proposeBtn").addEventListener("click", async () => {
+  const tastes = [...document.querySelectorAll("#tastes input:checked")].map(c => c.value);
+  if (tastes.length === 0) { $("proposeError").textContent = "テイストを1つ以上選んでください。"; return; }
+  $("proposeError").textContent = "";
+  $("proposeBtn").disabled = true;
+  const tier = $("tier").value;
+  const modelLabel = { standard: "Sonnet 5", premium: "Opus 4.8", master: "Fable 5" }[tier];
+  $("proposeStatus").innerHTML = `<span class="spinner"></span>${modelLabel} が提案書を執筆中…`;
+  $("proposalCard").classList.remove("hidden");
+  $("proposal").textContent = "";
+  let markdown = "";
+
+  try {
+    const res = await fetch("/api/propose", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ analysis, tastes, tier, budget: $("budget").value, notes: $("notes").value }),
+    });
+    if (!res.ok) {
+      const json = await res.json().catch(() => ({}));
+      throw new Error(json.error || `HTTP ${res.status}`);
+    }
+    const reader = res.body.getReader();
+    const decoder = new TextDecoder();
+    let buf = "";
+    while (true) {
+      const { done, value } = await reader.read();
+      if (done) break;
+      buf += decoder.decode(value, { stream: true });
+      const lines = buf.split("\n\n");
+      buf = lines.pop();
+      for (const line of lines) {
+        if (!line.startsWith("data: ")) continue;
+        const ev = JSON.parse(line.slice(6));
+        if (ev.type === "delta") {
+          markdown += ev.text;
+          $("proposal").innerHTML = mdToHtml(markdown);
+        } else if (ev.type === "done") {
+          addCost(ev.cost);
+          $("proposeStatus").textContent = `完了(応答モデル: ${ev.model})`;
+        } else if (ev.type === "error") {
+          throw new Error(ev.message);
+        }
+      }
+    }
+  } catch (err) {
+    $("proposeError").textContent = err.message;
+    $("proposeStatus").textContent = "";
+  } finally {
+    $("proposeBtn").disabled = false;
+  }
+});
+
+// 最小限のMarkdownレンダラ(見出し・強調・リスト・表)
+function mdToHtml(md) {
+  const lines = esc(md).split("\n");
+  let html = "", inList = false, tableBuf = [];
+  const flushTable = () => {
+    if (!tableBuf.length) return;
+    const rows = tableBuf.filter(r => !/^\s*\|[\s:-]+\|/.test(r));
+    html += "<table>" + rows.map((r, i) => {
+      const cells = r.split("|").slice(1, -1).map(c => c.trim());
+      const tag = i === 0 ? "th" : "td";
+      return "<tr>" + cells.map(c => `<${tag}>${inline(c)}</${tag}>`).join("") + "</tr>";
+    }).join("") + "</table>";
+    tableBuf = [];
+  };
+  const inline = (s) => s.replace(/\*\*(.+?)\*\*/g, "<b>$1</b>");
+  for (const line of lines) {
+    if (/^\s*\|.*\|\s*$/.test(line)) { tableBuf.push(line); continue; }
+    flushTable();
+    if (/^### /.test(line)) { if (inList) { html += "</ul>"; inList = false; } html += `<h3>${inline(line.slice(4))}</h3>`; }
+    else if (/^## /.test(line)) { if (inList) { html += "</ul>"; inList = false; } html += `<h2>${inline(line.slice(3))}</h2>`; }
+    else if (/^# /.test(line)) { if (inList) { html += "</ul>"; inList = false; } html += `<h2>${inline(line.slice(2))}</h2>`; }
+    else if (/^\s*[-*] /.test(line)) { if (!inList) { html += "<ul>"; inList = true; } html += `<li>${inline(line.replace(/^\s*[-*] /, ""))}</li>`; }
+    else if (line.trim() === "") { if (inList) { html += "</ul>"; inList = false; } }
+    else { if (inList) { html += "</ul>"; inList = false; } html += `<p>${inline(line)}</p>`; }
+  }
+  flushTable();
+  if (inList) html += "</ul>";
+  return html;
+}
+
+function addCost(cost) {
+  if (!cost || cost.usd == null) return;
+  totalUsd += cost.usd;
+  const jpy = Math.round(totalUsd * USD_JPY);
+  $("costbar").textContent =
+    `API使用コスト累計: 約¥${jpy}($${totalUsd.toFixed(4)}) | ` +
+    `直近: ${cost.model} 入力${cost.input_tokens}tok / 出力${cost.output_tokens}tok` +
+    (cost.cache_read_input_tokens ? ` / キャッシュ読取${cost.cache_read_input_tokens}tok` : "");
+}
+</script>
+</body>
+</html>

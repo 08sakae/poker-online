@@ -1,0 +1,50 @@
+{
+  "note": "参考価格・サイズは変動します。URLは各ブランドの検索ページです。",
+  "items": [
+    { "id": "sofa-01", "category": "ソファ", "brand": "IKEA", "name": "KIVIK 3人掛けソファ", "price_jpy": 79990, "size_cm": "W228 x D95 x H83", "styles": ["北欧", "モダン", "ファミリー"], "url": "https://www.ikea.com/jp/ja/search/?q=KIVIK" },
+    { "id": "sofa-02", "category": "ソファ", "brand": "ニトリ", "name": "布張りカウチソファ(Nポケット)", "price_jpy": 59990, "size_cm": "W180 x D93 x H86", "styles": ["カジュアル", "ファミリー"], "url": "https://www.nitori-net.jp/ec/search/?query=%E3%82%AB%E3%82%A6%E3%83%81%E3%82%BD%E3%83%95%E3%82%A1" },
+    { "id": "sofa-03", "category": "ソファ", "brand": "無印良品", "name": "体にフィットするソファ + ワイドアーム式ソファ 2.5シーター", "price_jpy": 69900, "size_cm": "W182 x D88.5 x H79.5", "styles": ["ジャパンディ", "ナチュラル", "ミニマル"], "url": "https://www.muji.com/jp/ja/store/cmdty/section/S10501" },
+    { "id": "sofa-04", "category": "ソファ", "brand": "LOWYA", "name": "ヴィンテージ調レザーテイストソファ 2人掛け", "price_jpy": 39990, "size_cm": "W160 x D78 x H70", "styles": ["インダストリアル", "ヴィンテージ", "ブルックリン"], "url": "https://www.low-ya.com/goods/search?keyword=%E3%82%BD%E3%83%95%E3%82%A1" },
+    { "id": "sofa-05", "category": "ソファ", "brand": "unico", "name": "ALBERO 3シーターソファ(オーク)", "price_jpy": 168000, "size_cm": "W190 x D82 x H75", "styles": ["北欧", "ナチュラル", "ジャパンディ"], "url": "https://www.unico-fan.co.jp/shop/c/csofa/" },
+
+    { "id": "table-01", "category": "リビングテーブル", "brand": "IKEA", "name": "LISTERBY コーヒーテーブル オーク材突き板", "price_jpy": 29990, "size_cm": "W140 x D60 x H37", "styles": ["北欧", "ナチュラル"], "url": "https://www.ikea.com/jp/ja/search/?q=LISTERBY" },
+    { "id": "table-02", "category": "リビングテーブル", "brand": "LOWYA", "name": "ガラス天板ローテーブル スチール脚", "price_jpy": 19990, "size_cm": "W100 x D50 x H35", "styles": ["モダン", "インダストリアル"], "url": "https://www.low-ya.com/goods/search?keyword=%E3%83%AD%E3%83%BC%E3%83%86%E3%83%BC%E3%83%96%E3%83%AB" },
+    { "id": "table-03", "category": "リビングテーブル", "brand": "無印良品", "name": "無垢材ローテーブル・オーク材", "price_jpy": 24900, "size_cm": "W110 x D55 x H35", "styles": ["ジャパンディ", "ナチュラル", "ミニマル"], "url": "https://www.muji.com/jp/ja/store/cmdty/section/S10502" },
+
+    { "id": "dining-01", "category": "ダイニングセット", "brand": "IKEA", "name": "EKEDALEN 伸長式テーブル + 椅子4脚", "price_jpy": 74960, "size_cm": "W120-180 x D80 x H75", "styles": ["北欧", "ファミリー"], "url": "https://www.ikea.com/jp/ja/search/?q=EKEDALEN" },
+    { "id": "dining-02", "category": "ダイニングセット", "brand": "ニトリ", "name": "ダイニングテーブルセット(4人用・ウォールナット調)", "price_jpy": 49990, "size_cm": "W135 x D80 x H72", "styles": ["モダン", "カジュアル"], "url": "https://www.nitori-net.jp/ec/search/?query=%E3%83%80%E3%82%A4%E3%83%8B%E3%83%B3%E3%82%B0%E3%82%BB%E3%83%83%E3%83%88" },
+    { "id": "dining-03", "category": "ダイニングセット", "brand": "unico", "name": "ADDAY ダイニングテーブル(アッシュ)", "price_jpy": 118000, "size_cm": "W140 x D80 x H72", "styles": ["北欧", "ジャパンディ"], "url": "https://www.unico-fan.co.jp/shop/c/cdiningtable/" },
+
+    { "id": "chair-01", "category": "チェア", "brand": "IKEA", "name": "POÄNG パーソナルチェア バーチ材", "price_jpy": 19990, "size_cm": "W68 x D82 x H100", "styles": ["北欧", "ナチュラル"], "url": "https://www.ikea.com/jp/ja/search/?q=POANG" },
+    { "id": "chair-02", "category": "チェア", "brand": "無印良品", "name": "リビングでもダイニングでもつかえるチェア", "price_jpy": 19900, "size_cm": "W55 x D68.5 x H77", "styles": ["ジャパンディ", "ミニマル"], "url": "https://www.muji.com/jp/ja/store/cmdty/section/S10503" },
+    { "id": "chair-03", "category": "チェア", "brand": "LOWYA", "name": "スチールフレーム ラウンジチェア", "price_jpy": 24990, "size_cm": "W72 x D80 x H85", "styles": ["インダストリアル", "モダン"], "url": "https://www.low-ya.com/goods/search?keyword=%E3%83%81%E3%82%A7%E3%82%A2" },
+
+    { "id": "bed-01", "category": "ベッド", "brand": "IKEA", "name": "MALM ベッドフレーム(収納付き)クイーン", "price_jpy": 59990, "size_cm": "W176 x L209 x H100", "styles": ["モダン", "ミニマル"], "url": "https://www.ikea.com/jp/ja/search/?q=MALM" },
+    { "id": "bed-02", "category": "ベッド", "brand": "無印良品", "name": "木製ベッド・オーク材 セミダブル", "price_jpy": 49900, "size_cm": "W126 x L202 x H25.5", "styles": ["ジャパンディ", "ナチュラル"], "url": "https://www.muji.com/jp/ja/store/cmdty/section/S10504" },
+    { "id": "bed-03", "category": "ベッド", "brand": "ニトリ", "name": "宮付きベッドフレーム(コンセント付き)ダブル", "price_jpy": 39990, "size_cm": "W141 x L215 x H84", "styles": ["カジュアル", "ファミリー"], "url": "https://www.nitori-net.jp/ec/search/?query=%E3%83%99%E3%83%83%E3%83%89%E3%83%95%E3%83%AC%E3%83%BC%E3%83%A0" },
+
+    { "id": "storage-01", "category": "収納", "brand": "IKEA", "name": "BESTÅ テレビボード コンビネーション", "price_jpy": 34990, "size_cm": "W180 x D42 x H48", "styles": ["モダン", "ミニマル", "北欧"], "url": "https://www.ikea.com/jp/ja/search/?q=BESTA" },
+    { "id": "storage-02", "category": "収納", "brand": "無印良品", "name": "スタッキングシェルフ・5段×2列・オーク材", "price_jpy": 34900, "size_cm": "W82 x D28.5 x H200", "styles": ["ジャパンディ", "ナチュラル", "ミニマル"], "url": "https://www.muji.com/jp/ja/store/cmdty/section/S10505" },
+    { "id": "storage-03", "category": "収納", "brand": "LOWYA", "name": "ヴィンテージ調オープンラック 4段", "price_jpy": 15990, "size_cm": "W80 x D35 x H150", "styles": ["インダストリアル", "ブルックリン"], "url": "https://www.low-ya.com/goods/search?keyword=%E3%83%A9%E3%83%83%E3%82%AF" },
+    { "id": "storage-04", "category": "収納", "brand": "ニトリ", "name": "カラーボックス Nカラボ 3段 ×3", "price_jpy": 5970, "size_cm": "W122 x D29.8 x H87.8", "styles": ["カジュアル", "ファミリー"], "url": "https://www.nitori-net.jp/ec/search/?query=%E3%82%AB%E3%83%A9%E3%83%9C" },
+
+    { "id": "light-01", "category": "照明", "brand": "IKEA", "name": "VINDKAST ペンダントランプ", "price_jpy": 7999, "size_cm": "直径50", "styles": ["北欧", "モダン"], "url": "https://www.ikea.com/jp/ja/search/?q=VINDKAST" },
+    { "id": "light-02", "category": "照明", "brand": "LOWYA", "name": "3灯シーリングスポットライト(スチール)", "price_jpy": 12990, "size_cm": "W78", "styles": ["インダストリアル", "ブルックリン"], "url": "https://www.low-ya.com/goods/search?keyword=%E7%85%A7%E6%98%8E" },
+    { "id": "light-03", "category": "照明", "brand": "無印良品", "name": "LEDフロアライト(木製)", "price_jpy": 14900, "size_cm": "H120", "styles": ["ジャパンディ", "ナチュラル"], "url": "https://www.muji.com/jp/ja/store/cmdty/section/S10506" },
+    { "id": "light-04", "category": "照明", "brand": "Francfranc", "name": "エトワル ペンダントランプ(ゴールド)", "price_jpy": 16500, "size_cm": "直径40", "styles": ["フェミニン", "ホテルライク"], "url": "https://francfranc.com/search?q=%E3%83%9A%E3%83%B3%E3%83%80%E3%83%B3%E3%83%88%E3%83%A9%E3%83%B3%E3%83%97" },
+
+    { "id": "rug-01", "category": "ラグ", "brand": "IKEA", "name": "STOENSE ラグ パイル短(オフホワイト)", "price_jpy": 14990, "size_cm": "200 x 300", "styles": ["北欧", "ミニマル", "ホテルライク"], "url": "https://www.ikea.com/jp/ja/search/?q=STOENSE" },
+    { "id": "rug-02", "category": "ラグ", "brand": "ニトリ", "name": "ウィルトン織りラグ(幾何柄)", "price_jpy": 12990, "size_cm": "160 x 230", "styles": ["ヴィンテージ", "ブルックリン"], "url": "https://www.nitori-net.jp/ec/search/?query=%E3%82%A6%E3%82%A3%E3%83%AB%E3%83%88%E3%83%B3%E7%B9%94%E3%82%8A%E3%83%A9%E3%82%B0" },
+    { "id": "rug-03", "category": "ラグ", "brand": "無印良品", "name": "ウールパイル織りラグ(生成)", "price_jpy": 19900, "size_cm": "140 x 200", "styles": ["ジャパンディ", "ナチュラル"], "url": "https://www.muji.com/jp/ja/store/cmdty/section/S10507" },
+
+    { "id": "curtain-01", "category": "カーテン", "brand": "ニトリ", "name": "遮光2級カーテン + レース 4枚組(リネン調)", "price_jpy": 9990, "size_cm": "W100 x H200 x4", "styles": ["ナチュラル", "北欧", "ファミリー"], "url": "https://www.nitori-net.jp/ec/search/?query=%E9%81%AE%E5%85%89%E3%82%AB%E3%83%BC%E3%83%86%E3%83%B3" },
+    { "id": "curtain-02", "category": "カーテン", "brand": "無印良品", "name": "綿洗いざらしノンプリーツカーテン", "price_jpy": 6990, "size_cm": "W100 x H200 x2", "styles": ["ジャパンディ", "ミニマル"], "url": "https://www.muji.com/jp/ja/store/cmdty/section/S10508" },
+
+    { "id": "desk-01", "category": "デスク", "brand": "IKEA", "name": "BEKANT デスク(ホワイトステインオーク)", "price_jpy": 27990, "size_cm": "W160 x D80 x H65-85", "styles": ["モダン", "北欧", "ワークスペース"], "url": "https://www.ikea.com/jp/ja/search/?q=BEKANT" },
+    { "id": "desk-02", "category": "デスク", "brand": "LOWYA", "name": "L字デスク 木目調 x スチール", "price_jpy": 19990, "size_cm": "W150 x D140 x H74", "styles": ["インダストリアル", "ワークスペース"], "url": "https://www.low-ya.com/goods/search?keyword=%E3%83%87%E3%82%B9%E3%82%AF" },
+
+    { "id": "green-01", "category": "グリーン・雑貨", "brand": "IKEA", "name": "FEJKA 人工観葉植物(モンステラ)", "price_jpy": 3999, "size_cm": "H90", "styles": ["どのテイストにも"], "url": "https://www.ikea.com/jp/ja/search/?q=FEJKA" },
+    { "id": "green-02", "category": "グリーン・雑貨", "brand": "Francfranc", "name": "フラワーベース + アートポスターセット", "price_jpy": 8800, "size_cm": "-", "styles": ["フェミニン", "ホテルライク", "モダン"], "url": "https://francfranc.com/search?q=%E3%83%95%E3%83%A9%E3%83%AF%E3%83%BC%E3%83%99%E3%83%BC%E3%82%B9" },
+    { "id": "mirror-01", "category": "グリーン・雑貨", "brand": "LOWYA", "name": "全身ミラー スタンドタイプ(ブラックフレーム)", "price_jpy": 12990, "size_cm": "W40 x H160", "styles": ["モダン", "インダストリアル", "ホテルライク"], "url": "https://www.low-ya.com/goods/search?keyword=%E3%83%9F%E3%83%A9%E3%83%BC" }
+  ]
+}

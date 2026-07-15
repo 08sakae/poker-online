@@ -29,3 +29,7 @@ npm start
 - **バックエンド**: Node.js, Express, Socket.io
 - **フロントエンド**: React, Vite
 - **リアルタイム通信**: WebSocket (Socket.io)
+
+## 同梱ツール
+
+- [`interior-ai/`](./interior-ai/README.md) — AIインテリアデザイン提案ツール(図面・写真から市販家具のコーディネートを提案)
