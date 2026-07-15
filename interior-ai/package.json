@@ -1,0 +1,16 @@
+{
+  "name": "interior-ai",
+  "version": "1.0.0",
+  "description": "AIインテリアデザイン提案ツール - 図面・写真から市販家具のコーディネートを提案",
+  "type": "module",
+  "engines": {
+    "node": ">=18"
+  },
+  "scripts": {
+    "start": "node server/index.js"
+  },
+  "dependencies": {
+    "@anthropic-ai/sdk": "^0.111.0",
+    "express": "^4.18.2"
+  }
+}
